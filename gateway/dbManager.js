@@ -2,13 +2,13 @@ const user = require('./user.model');
 
 class dbManager{
 	
-	async findUser(conditions , projectionStr , numberOfusers){
-		if(values.length !== queryKeys.length)
-			return false;
+	async findUser(conditions  , numberOfusers , projectionStr = undefined){
 		if(numberOfusers === 1 ){
-			return await user.findOne(conditions , projectionStr);
+			const result =  await user.findOne(conditions , projectionStr);
+			return {success:true , users:result}
 		}else{
-			return await user.find(conditions , projectionStr ).limit(numberOfusers); 
+			const result =  await user.find(conditions , projectionStr ).limit(numberOfusers);
+			return {success:true , users:result} 
 		}
 	}
 	async saveUser(account){
