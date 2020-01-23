@@ -25,8 +25,9 @@ function init(passport) {
 	passport.serializeUser((user, done) => {
 		console.log(user);
 		done(null , user.id)});
-	passport.deserializeUser(async (email, done) => {
-		const user = await findUser([email], ['email'], 1 );
+	passport.deserializeUser(async (id, done) => {
+		const user = await findUser({id}, 1 );
+		console.log(id);
 		return done(null, user);
 	});
 }
