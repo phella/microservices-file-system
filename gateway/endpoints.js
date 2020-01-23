@@ -19,8 +19,7 @@ const nexmo = new Nexmo({
 
 router.post('/login', passport.authenticate('local',{
     successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash:true
+    failureRedirect: '/login'
 }))
 
 router.post('/register', checkNotAuthenticated, async (req, res) => {

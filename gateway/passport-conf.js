@@ -4,28 +4,27 @@ const dbManager = require('./dbManager');
 
 function init(passport) {
 	
-	const authenticateUsers = (email, password, done) => {
-		const checkUser = async (user) => {
-			if (user == null) {
+	const authenticateUsers = async (email, password, done) => {
+		const user = await dbManager.findUser({email},1);
+			if (user.users == null) {
 				return done(null, false, { message: "No user found." });
 			}
 			// Wrap async in try catch 
 			try {
-				const flag = await bcrypt.compare(password, user.password);
+				const flag = await bcrypt.compare(password, user.users.password);
 				if (flag) {
-					return done(null, user);
+					return done(null, user.users);
 				} else {
 					return done(null, false, { message: "Wronng password" });
 				}
 			} catch (e) {
 				return done(e);
 			}
-		};
-	
-		dbManager.findUser([email], ['email'], 1 ).then(checkUser(user));
 	};
 	passport.use(new localStrategy({ usernameField: 'email' }, authenticateUsers));
-	passport.serializeUser((user, done) => done(null , user.email));
+	passport.serializeUser((user, done) => {
+		console.log(user);
+		done(null , user.id)});
 	passport.deserializeUser(async (email, done) => {
 		const user = await findUser([email], ['email'], 1 );
 		return done(null, user);
