@@ -11,6 +11,11 @@ const passport = require('passport');
 const initializePassport=require('./passport-conf');
 initializePassport(passport);
 const app = express();
+app.use(session({
+	secret : process.env.secret,
+	resave : false , 
+	saveUninitialized : false
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.urlencoded({extended:true}));
@@ -20,11 +25,7 @@ const port = process.env.PORT || 3000;
 app.use(require('./endpoints'));
 app.use(morgan('tiny'));
 app.use(flash());
-app.use(session({
-	secret : process.env.secret,
-	resave : false , 
-	saveUninitialized : false
-}));
+
 
 
 Mongoose.connect('mongodb://localhost:27017/market',{useNewUrlParser:true , useUnifiedTopology: true },

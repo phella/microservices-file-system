@@ -18,9 +18,7 @@ const nexmo = new Nexmo({
   apiSecret: process.env.apiSecret,
 });
 
-router.post('/login', passport.authenticate('local',{failureRedirect: '/login'}),(req,res)=>{
-  res.status(200).json("logged in successfully");
-})
+router.post('/login', passport.authenticate('local',{failureRedirect: '/login',successRedirect:'/abc'}));
 
 router.post('/logout',(req,res)=>{
   req.logout();
@@ -66,8 +64,11 @@ router.post('/register', checkNotAuthenticated, async (req, res) => {
   })
 
   router.get('/login',async(req,res)=>{
-    console.log(req.user);
-    res.status(200).send("hi");
+    res.status(200).send("Login Here");
+  })
+
+  router.get('/' , checkAuthenticated  , (req,res)=>{
+    res.status(200).json("Home page")
   })
   function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {

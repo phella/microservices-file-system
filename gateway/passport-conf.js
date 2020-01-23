@@ -23,10 +23,10 @@ function init(passport) {
 	};
 	passport.use(new localStrategy({ usernameField: 'email' }, authenticateUsers));
 	passport.serializeUser((user, done) => {
-		console.log(user);
+		// console.log(user);
 		done(null , user.id)});
 	passport.deserializeUser(async (id, done) => {
-		const user = await findUser({id}, 1 );
+		const user = await dbManager.findUser({id}, 1 );
 		console.log(id);
 		return done(null, user);
 	});
