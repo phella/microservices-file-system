@@ -12,4 +12,8 @@ router.get('/content', (req,res)=>{
     });
 });
 
+router.post('/newAccount',(req,res)=>{
+  
+});
+
 module.exports = router;

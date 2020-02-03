@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 const port = process.env.PORT || 3000;
 // add /files in path
-app.use(require('./endpoints'));
+app.use('/files',require('./endpoints'));
 app.use(morgan('tiny'));
 
 
