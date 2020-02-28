@@ -16,9 +16,7 @@
   "license": "MIT ",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "chalk": "^3.0.0",
     "cookie-session": "^1.4.0",
-    "debug": "^4.1.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-flash": "0.0.2",
@@ -27,10 +25,14 @@
     "mongoose-unique-validator": "^2.0.3",
     "morgan": "^1.9.1",
     "nexmo": "^2.6.0",
-    "nodemon": "^2.0.2",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "redis": "^2.8.0"
+  },
+  "devDependencies":{
+     "chalk": "^3.0.0",
+     "debug": "^4.1.1",
+     "nodemon": "^2.0.2" 
   }
 }
