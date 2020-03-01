@@ -2,8 +2,8 @@ import zmq
 import sys
 import time
 
-port = "5556"
-id = 1
+port = sys.argv[2]
+id = int(sys.argv[1])
 
 context = zmq.Context()
 socket = context.socket(zmq.PUB)

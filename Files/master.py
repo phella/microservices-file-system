@@ -13,10 +13,10 @@ ips = []        # List of data keepers id
 ports = []      # List of ports
 storage = [1024]*n     # List of free storage on each data keeper
 
-for i in range(0 , 2*n - 1):
+for i in range(0 , 2*n - 1 , 2):
     ips.append(sys.argv[2+i])
-    i += 1 
-    ports.append(sys.argv[2+i])
+    ports.append(sys.argv[3+i])
+
 
 # Socket to talk to server
 context = zmq.Context()
