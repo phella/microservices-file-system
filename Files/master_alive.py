@@ -1,6 +1,6 @@
 import sys
 import zmq
-from multiprocessing import Process, Value, Array
+from multiprocessing import Process, Array , Manager
 from utility import log 
 
 port = "5556"
@@ -15,26 +15,31 @@ ports = []      # List of ports
 storage = [1024]*n     # List of free storage on each data keeper
 
 
+
 for i in range(0 , 2*n - 1 , 2):
     ips.append(sys.argv[2+i])
     ports.append(sys.argv[3+i])
 
-def tracker(dummy,status_table):
+def tracker(id,status_table , lookup_table):
     for i in range(len(status_table)):
         print(status_table[i])
+    lookup_table.append({"A":1})
 
 
+if __name__ == '__main__':
+    with Manager() as manager:
+        lookup_table = manager.list()
+        print(lookup_table)
+        p1 = Process(target = tracker , args = (1 , status , lookup_table) )
+        p2 = Process(target = tracker , args = (2 , status , lookup_table) )
+        p3 = Process(target = tracker , args = (3 , status , lookup_table) )
+        p1.start()
+        p2.start()
+        p3.start()
+        p1.join()
+        p2.join()
+        p3.join()
 
-def build_tracker():
-    p1 = Process(target = tracker , args = (1,status) )
-    p2 = Process(target = tracker , args = (1,status) )
-    p3 = Process(target = tracker , args = (1,status) )
-    p1.start()
-    p2.start()
-    p3.start()
-
-
-build_tracker()
 
 
 # Socket to talk to server
