@@ -2,10 +2,11 @@ import sys
 sys.path.append('../')
 import zmq
 from multiprocessing import Process, Array , Manager
-from utility import log 
+from utility import log , remove_log
 from Master.isALive import alive
 from Master.tracker import tracker
 from Master.replica import replica
+
 
 no_process = 3
 port_base = 5556
@@ -18,7 +19,9 @@ ips = [
 if __name__ == '__main__':
     with Manager() as manager:
         lookup_table = manager.dict()
-        free_ports = manager.list()
+        free_ports = manager.dict()
+        for i in range(3) : 
+            free_ports[i] = [ 5700 , 5701 , 5702 ] 
         p0 = Process(target = alive , args = ( no_keepers , ips , status , lookup_table , free_ports) )
         for i in range (no_process):
             p1 = Process(target = tracker , args = (i , ips , str( port_base + i )  ,  status , lookup_table , free_ports) )
