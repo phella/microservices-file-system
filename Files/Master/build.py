@@ -15,7 +15,7 @@ ips = [
 
 if __name__ == '__main__':
     with Manager() as manager:
-        lookup_table = manager.list()
+        lookup_table = manager.dict()
         free_ports = manager.list()
         p0 = Process(target = alive , args = ( no_keepers , ips , status , lookup_table , free_ports) )
         for i in range (no_process):
