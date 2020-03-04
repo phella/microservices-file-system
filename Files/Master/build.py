@@ -19,6 +19,6 @@ if __name__ == '__main__':
         free_ports = manager.list()
         p0 = Process(target = alive , args = ( no_keepers , ips , status , lookup_table , free_ports) )
         for i in range (no_process):
-            p1 = Process(target = tracker , args = (1 , str( port_base + i )  ,  status , lookup_table , free_ports) )
+            p1 = Process(target = tracker , args = (i , ips , str( port_base + i )  ,  status , lookup_table , free_ports) )
             p1.start()
             p1.join()
