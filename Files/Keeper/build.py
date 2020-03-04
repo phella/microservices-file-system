@@ -7,7 +7,7 @@ from multiprocessing import Process
 sys.path.append('../')
 from utility import remove_log
 from Keeper.keeper import keeper
-from Keeper.isAlive import 
+from Keeper.isAlive import alive 
 
 
 remove_log()
