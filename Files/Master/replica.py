@@ -1,5 +1,7 @@
-
-def replica(num_of_replicas,status,lookup,freeports):
+def replica(port,num_of_replicas,status,lookup,freeports,ips):
+    context = zmq.Context()
+    zmq_socket = context.socket(zmq.PUSH)
+    zmq_socket.connect("tcp://*:%s" % port)
     while True:
         keys = Dictionary1.keys()
         for file in keys:
@@ -14,11 +16,22 @@ def replica(num_of_replicas,status,lookup,freeports):
                 repeat(file , used , status , lookup , freeports,x,num_of_replicas)
         sleep(10)
 
-def repeat(index, used , status , lookup,freeports,count,num_of_replicas):# index of the file in the lookup table
+def repeat(index, used , status , lookup,freeports,ips,count,num_of_replicas):# index of the file in the lookup table
     free_keepers = [x for x in range(len(status)) if x not in used]
     for i in free_keepers:  #checking until find a datakeeper free of my file
             if( count > num_of_replicas):
                 break
             if(status[i] == 1): #the datakeeper is alive
                 count += 1
-                #download  here i need  hamdyyyyyyyy
+                lis = []
+                lis2 = []
+                c=0
+                while c < 1 :
+                    try:
+                        x = free_ports[i].pop(0)
+                        lis.append(x)
+                        lis2.append(ips[i])
+                        c += 1
+                    except:
+                        break
+                socket.send_pyobj({"ports":lis, "ips":lis2,"filename":index})
