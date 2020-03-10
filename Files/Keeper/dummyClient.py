@@ -1,9 +1,10 @@
 import zmq
 import sys
 import time
-sys.path.insert(1, '../../Files')
 
 import up_down
+
+
 def dummyClient(port):
     context = zmq.Context()
     socket = context.socket(zmq.PULL)

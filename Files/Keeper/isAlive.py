@@ -10,5 +10,5 @@ def alive(id , port):
 
     while True:
         topic = 1
-        socket.send_string("%s %d %d" % ("isALive", id))
+        socket.send_string("%s %d " % ("isALive", id))
         time.sleep(1)

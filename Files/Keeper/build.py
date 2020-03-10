@@ -4,14 +4,12 @@ import subprocess
 import os
 import sys
 from multiprocessing import Process
-sys.path.insert(0, "../../Files/")
-from Files.utility import remove_log
-from Files.Keeper.data_keeper import Keeper
-from Files.Keeper.isAlive import alive 
+from utility import remove_log
+from data_keeper import Keeper
+from isAlive import alive 
 
-
+id =0
 remove_log()
-sys.path.append('Keeper/')
 n = 3
 # run same data keeper many times
 for i in range(0,n):
@@ -19,4 +17,6 @@ for i in range(0,n):
     p0.start()
 
 
-p0 = Process(target = alive , args = (sys.argv[1] ,  str(6000)) )
+p0 = Process(target = alive , args = ( id ,  str(6000)) )
+p0.start()
+p0.join()
