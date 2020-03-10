@@ -8,6 +8,7 @@ from multiprocessing import Process
 from utility import remove_log
 from data_keeper import Keeper
 from isAlive import alive 
+from dummyClient import dummyClient
 
 id =0
 remove_log()

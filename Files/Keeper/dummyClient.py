@@ -15,7 +15,7 @@ def makeConnections(ports, ips):
 def dummyClient(port):
     context = zmq.Context()
     socket = context.socket(zmq.PULL)
-    socket.bind("tcp://*:%s" % port)
+    socket.connect("tcp://192.168.110.133:%s" % port)
     context = zmq.Context()
     socketDk = context.socket(zmq.REQ)
 

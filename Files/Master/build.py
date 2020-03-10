@@ -12,10 +12,12 @@ from utility import log , remove_log
 remove_log()
 no_process = 3
 port_base = 5556
-no_keepers = 1
+no_keepers = 3
 status = Array('i', [1]*no_keepers)  # Status of data keepers
 ips = [
-    "tcp://127.0.0.1:"
+    "tcp://192.168.43.79:",
+    "tcp://127.0.0.1:",
+    "tcp://192.168.43.30:"
 ]
 
 if __name__ == '__main__':
