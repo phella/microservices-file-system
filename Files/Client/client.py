@@ -4,7 +4,7 @@ import random
 import time
 import os
 import cv2 
-# import up_down
+import up_down
 
 
 port = "5559"
