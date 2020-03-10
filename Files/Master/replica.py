@@ -1,9 +1,14 @@
-def replica(port,num_of_replicas,status,lookup,freeports,ips):
+import sys
+import zmq
+import time
+
+port = "7000"
+def replica(num_of_replicas,status,lookup,freeports,ips):
     context = zmq.Context()
     zmq_socket = context.socket(zmq.PUSH)
-    zmq_socket.connect("tcp://*:%s" % port)
+    zmq_socket.bind("tcp://*:%s" % port)
     while True:
-        keys = Dictionary1.keys()
+        keys = lookup.keys()
         for file in keys:
             nodes = lookup[file]
             x=0
@@ -14,7 +19,7 @@ def replica(port,num_of_replicas,status,lookup,freeports,ips):
                 if(status[node]):
                     x += 1
                 repeat(file , used , status , lookup , freeports,x,num_of_replicas)
-        sleep(10)
+        time.sleep(10)
 
 def repeat(index, used , status , lookup,freeports,ips,count,num_of_replicas):# index of the file in the lookup table
     free_keepers = [x for x in range(len(status)) if x not in used]
