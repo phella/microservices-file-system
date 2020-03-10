@@ -3,8 +3,10 @@ import random
 import sys
 import time
 
-sys.path.insert(0, "../../Files/")
-import Files.up_down as up_down
+# sys.path.insert(0, "../../Files/")
+# import Files.up_down as up_down
+
+import up_down
 
 #pair connection to serve client upload/download
 def Keeper(id,port2):
