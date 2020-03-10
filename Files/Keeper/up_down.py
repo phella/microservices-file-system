@@ -16,19 +16,22 @@ def upload (socketDk,file):
     #     socketDk.send_pyobj({"frame":image})
     #     success,image = cap.read()
     # return socketDk.recv_pyobj()
-    f=open(file,'rb')
-    rd=f.read()
-    socketDk.send_pyobj({"file":rd})
+    f = open(file,'rb')
+    rd = f.read()
+    print(f)
+    socketDk.send_pyobj({"type":"upload","file" : rd ,"filename" : file})
     f.close()
     return socketDk.recv_pyobj()
 
 
-def download (socketDk,file):
-    socketDk.send_pyobj({"type":"download","file":file})
-    ret=socketDk.recv_pyobj()
-    f=open(file,'wb')
-    f.write(ret)
+def download (socketDk,file ,filename):
+    # socketDk.send_pyobj({"type" : "download" , "file":file })
+    print(file,filename)
+    f = open(filename , 'wb')
+    f.write(file)
     f.close()
+    socketDk.send_string("succeful uploading")
+    print("file downloaded")
     # out= cv2.cv2.VideoWriter(file,cv2.cv2.VideoWriter_fourcc(*'MP4V'),ret["protocol"][0],(ret["protocol"][1],ret["protocol"][2]))
     # while (True):
     #     frame=socketDk.recv_pyobj()

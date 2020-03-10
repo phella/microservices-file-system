@@ -31,16 +31,19 @@ def askTracker(type , filename):
 
 def makeConnections(ports,ips):
     for i in range (len(ports)):
-        socketDk.connect(ips[i] + ":%s" % ports[i])
+        socketDk.connect(ips[i] +  ports[i])
+        log(" Client connected to data keeper")
 
 def main(type , filename):
     message = askTracker(type ,filename)
     ports = message["ports"]
     ips = message["ips"]
-    makeConnections(ports,ips)
+    makeConnections( ports , ips ) 
     if type == "upload":
         up_down.upload(socketDk,filename)
+        log("File uploaded successfully")
     else:
         up_down.download(socketDk,filename)
+        log("File downloaded successfully")
 
 main(sys.argv[1] ,  sys.argv[2] )
