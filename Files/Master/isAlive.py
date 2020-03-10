@@ -5,7 +5,7 @@ from multiprocessing import Process, Array , Manager
 from utility import log 
 
 def alive( no_keepers , ips , status , lookup_table , free_ports):
-    current = n     # Number of alive data keepers
+    current = no_keepers     # Number of alive data keepers
     active =  {0}      # Every second collect data keepers in set
     active.clear()
     counter = 0      # Every second count data keepers
@@ -14,7 +14,7 @@ def alive( no_keepers , ips , status , lookup_table , free_ports):
     context = zmq.Context()
     socket = context.socket(zmq.SUB)
 
-    for i in range(0 , n):
+    for i in range(0 , no_keepers):
         socket.connect ( ips[i] + "6000" )
 
     topicfilter = "isALive"
@@ -31,7 +31,7 @@ def alive( no_keepers , ips , status , lookup_table , free_ports):
         counter += 1
         if( counter ==  current ):                # 1 sec completed
             if(len(active) != current):           # Replicated data keeper means 1 data keeper is dead
-                status = [0] * n
+                status = [0] * no_keepers
                 current = len(active)             # New current number
                 for i in range(0 , current):
                     status[active.pop() - 1 ] = 1    # Mark active data keepers 

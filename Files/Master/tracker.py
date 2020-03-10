@@ -24,9 +24,9 @@ def tracker(id , no_keepers , ips , port ,  status_table , lookup_table , free_p
                     count += 1
                     counter = (counter + 1)% no_keepers
                 except:
-
+                    print("Found")
             socket.send_pyobj({"ports":lis , "ips" : lis2})
-        else if( message["type" ] == "download"):
+        elif( message["type" ] == "download"):
             filename = message["file"]
             nodes = lookup_table[filename]
             y = random.choice(nodes)

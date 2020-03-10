@@ -4,7 +4,7 @@ import sys
 
 def update_table( port , ips , free_ports , lookup_table ):
     context = zmq.Context()
-    ssocket = context.socket(zmq.SUB)
+    socket = context.socket(zmq.SUB)
     for ip in ips :
         socket.connect (ip + port)
     topicfilter = "update"
