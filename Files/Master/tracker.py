@@ -12,20 +12,24 @@ def tracker(id , no_keepers , ips , port ,  status_table , lookup_table , free_p
     while True:
     #  Wait for next request from client
         message = socket.recv_pyobj()
+        log(" Client request " + message["type"] +" filename " + message["file"] , str(id)) 
         if(message["type"] == "upload"):
             lis = []
             lis2 = []
             count = 0
             while count < 1 :
                 try:
-                    x = free_ports[counter].pop(0)
+                    temp = free_ports[counter]
+                    x = str(temp.pop(0))
+                    free_ports[counter] = temp
                     lis.append(x)
-                    lis2.append(ips[counter])
+                    lis2.append(str(ips[counter]))
                     count += 1
                     counter = (counter + 1)% no_keepers
                 except:
-                    print("Found")
+                    pass
             socket.send_pyobj({"ports":lis , "ips" : lis2})
+            log(" Respond to upload request" , str(id))
         elif( message["type" ] == "download"):
             filename = message["file"]
             nodes = lookup_table[filename]
@@ -43,3 +47,4 @@ def tracker(id , no_keepers , ips , port ,  status_table , lookup_table , free_p
                 except:
                     y = random.choice(nodes)
             socket.send_pyobj({"ports":lis, "ips":lis2})
+            log(" Respond to upload request" , str(id))

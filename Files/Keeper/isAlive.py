@@ -1,7 +1,7 @@
 import zmq
 import sys
 import time
-
+from utility import log
 
 def alive(id , port):
     context = zmq.Context()
@@ -11,4 +11,5 @@ def alive(id , port):
     while True:
         topic = 1
         socket.send_string("%s %d " % ("isALive", id))
+        log("Is alive sent")
         time.sleep(1)
