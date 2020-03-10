@@ -9,7 +9,7 @@ socketDk = context.socket(zmq.REQ)
 
 def makeConnections(ports, ips):
     for i in range(len(ports)):
-        socketDk.connect("tcp://"+ips[i]+":%s" % ports[i])
+        socketDk.connect(ips[i]+":%s" % ports[i])
 
 
 def dummyClient(port):
