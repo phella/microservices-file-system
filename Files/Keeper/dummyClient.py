@@ -1,12 +1,8 @@
 import zmq
 import sys
 import time
-sys.path.insert(1, '../../Files')
 
 import up_down
-sys.path.insert(1, "../../")
-# import Files.up_down as up_down
-import Files.client
 
 def dummyClient(port):
     context = zmq.Context()

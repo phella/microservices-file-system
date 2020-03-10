@@ -2,10 +2,6 @@ import zmq
 import random
 import sys
 import time
-
-# sys.path.insert(0, "../../Files/")
-# import Files.up_down as up_down
-
 import up_down
 
 #pair connection to serve client upload/download
@@ -24,7 +20,3 @@ def Keeper(id,port2):
 
     #tell master tracker i've finished U/D file...
     socket2.send_pyopbj({"msg":"successfull_work","file" : None,"type":message["type"]})
-
-
-##the master should inform the client with successfull work and save file in LUT
-###########################################################

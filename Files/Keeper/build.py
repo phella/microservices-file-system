@@ -1,13 +1,16 @@
 # takes id of the data_keeper
 
 import subprocess
+import importlib
 import os
 import sys
 from multiprocessing import Process
-sys.path.insert(0, "../../Files/")
-from Files.utility import remove_log
-from Files.Keeper.data_keeper import Keeper
-from Files.Keeper.isAlive import alive 
+sys.path.insert(0,'/home/ahmed/education/3rd year/operating system/2nd term/Drive/Files/')
+from utility import remove_log
+sys.path.insert(0,'/home/ahmed/education/3rd year/operating system/2nd term/Drive/Files/Keeper/')
+from Keeper.data_keeper import Keeper
+sys.path.insert(0,'/home/ahmed/education/3rd year/operating system/2nd term/Drive/Files/Keeper/')
+from Keeper.isAlive import alive
 
 
 remove_log()
