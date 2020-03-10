@@ -19,7 +19,9 @@ def tracker(id , no_keepers , ips , port ,  status_table , lookup_table , free_p
             count = 0
             while count < 1 :
                 try:
-                    x = str(free_ports[counter].pop(0))
+                    temp = free_ports[counter]
+                    x = str(temp.pop(0))
+                    free_ports[counter] = temp
                     lis.append(x)
                     lis2.append(str(ips[counter]))
                     count += 1
