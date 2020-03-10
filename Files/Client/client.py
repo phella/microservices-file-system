@@ -26,6 +26,7 @@ def askTracker(type , filename):
     log(" Request of type" + type + " sent")
     #  Get the reply of the DK and port no of it to communicate. 
     message = socket.recv_pyobj()
+    print(message)
     log(" Response recieved with ip" + message["ips"][0] + " port number " +message["ports"][0])
     return message
 
