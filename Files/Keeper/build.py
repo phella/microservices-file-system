@@ -10,7 +10,7 @@ from data_keeper import Keeper
 from isAlive import alive 
 from dummyClient import dummyClient
 
-id =0
+id = int(sys.argv[1])
 remove_log()
 n = 3
 # run same data keeper many times
