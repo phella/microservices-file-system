@@ -9,7 +9,7 @@ from utility import remove_log
 from data_keeper import Keeper
 from isAlive import alive 
 
-id =0
+id =1
 remove_log()
 n = 3
 # run same data keeper many times

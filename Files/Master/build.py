@@ -30,7 +30,7 @@ if __name__ == '__main__':
         for i in range (no_process):
             p1 = Process(target = tracker , args = (i , no_keepers , ips , str( port_base + i )  ,  status , lookup_table , free_ports) )
             p1.start()
-        p1 = Process( target = replica , args = (2,status,lookup_table,free_ports,ips))
+        p1 = Process( target = replica , args = (no_keepers,2,status,lookup_table,free_ports,ips))
         p1.start()
         p2 = Process(target = update_table , args = ( str(3555) , ips , free_ports , lookup_table)  )
         p2.start()
