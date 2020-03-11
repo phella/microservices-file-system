@@ -18,7 +18,9 @@ def update_table( port , ips , free_ports , lookup_table ):
         string = socket.recv_string()
         topic , id , free_port , filename = string.split()
         log(" Recived from id "+ id +" filename " + filename + " port free " + free_port)
-        free_ports[int(id)].append(free_port)
+        temp = free_ports[int(id)]
+        temp.append(free_port)
+        free_ports[int(id)] = temp 
         if filename in lookup_table :
             temp = lookup_table[filename]
             temp.append(id)
