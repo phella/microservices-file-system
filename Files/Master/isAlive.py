@@ -1,14 +1,17 @@
 import sys
-sys.path.append('../')
 import zmq
+import signal
 from multiprocessing import Process, Array , Manager
 from utility import log 
 
+keepers = 0 
 def alive( no_keepers , ips , status , lookup_table , free_ports):
     current = no_keepers     # Number of alive data keepers
+    keepers = no_keepers
     active =  {0}      # Every second collect data keepers in set
     active.clear()
     counter = 0      # Every second count data keepers
+    signal.signal(signal.SIGALRM, handler)
 
     # Socket to talk to server
     context = zmq.Context()
@@ -21,6 +24,7 @@ def alive( no_keepers , ips , status , lookup_table , free_ports):
     socket.setsockopt_string(zmq.SUBSCRIBE, topicfilter)
     
     while(True): 
+        signal.alarm(2)
         state = socket.recv_string()
         topic , id = state.split()
         log("Data keeper " + id + " alive")
@@ -37,3 +41,8 @@ def alive( no_keepers , ips , status , lookup_table , free_ports):
                     status[active.pop() - 1 ] = 1    # Mark active data keepers 
             counter = 0                                 #init counters
             active.clear()
+
+
+def handler(signum, frame):
+    signal.alarm(2)
+    status = [0]*keepers

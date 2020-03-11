@@ -8,6 +8,7 @@ from multiprocessing import Process
 from utility import remove_log
 from data_keeper import Keeper
 from isAlive import alive 
+from dummyClient import dummyClient
 
 id =1
 remove_log()
@@ -20,4 +21,5 @@ for i in range(0,n):
 
 p0 = Process(target = alive , args = ( id ,  str(6000)) )
 p0.start()
+#p1 = Process(target = dummyClient , args(""))
 p0.join()
