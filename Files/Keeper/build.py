@@ -10,7 +10,7 @@ from data_keeper import Keeper
 from isAlive import alive 
 from dummyClient import dummyClient
 
-id = 1
+id =1
 remove_log()
 n = 3
 # run same data keeper many times
@@ -21,4 +21,5 @@ for i in range(0,n):
 
 p0 = Process(target = alive , args = ( id ,  str(6000)) )
 p0.start()
+#p1 = Process(target = dummyClient , args(""))
 p0.join()
