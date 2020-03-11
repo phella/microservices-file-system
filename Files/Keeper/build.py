@@ -23,5 +23,5 @@ for i in range(0,n):
 
 p0 = Process(target = alive , args = ( id ,  str(6000)) )
 p0.start()
-#p1 = Process(target = dummyClient , args(""))
+p1 = Process(target = dummyClient)
 p0.join()

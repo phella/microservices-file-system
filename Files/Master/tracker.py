@@ -19,6 +19,8 @@ def tracker(id , no_keepers , ips , port ,  status_table , lookup_table , free_p
         if(message["type"] == "upload"):
             while count < 1 :
                 try:
+                    while(not status_table[counter]):
+                        counter = (counter + 1)% no_keepers
                     temp = free_ports[counter]
                     x = str(temp.pop(0))
                     free_ports[counter] = temp

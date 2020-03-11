@@ -15,9 +15,9 @@ port_base = 5556
 no_keepers = 3
 status = Array('i', [1]*no_keepers)  # Status of data keepers
 ips = [
-    "tcp://192.168.43.79:",
     "tcp://127.0.0.1:",
-    "tcp://192.168.43.30:"
+    "tcp://192.168.43.79:",
+    "tcp://192.168.74.129:"
 ]
 
 if __name__ == '__main__':

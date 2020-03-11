@@ -9,7 +9,7 @@ socketDk = context.socket(zmq.REQ)
 port="7000"
 context = zmq.Context()
 socket = context.socket(zmq.PULL)
-socket.bind("tcp://*:%s" % port)
+socket.connect("tcp://127.0.0.1:%s" % port)
 
 def makeConnections(ports, ips):
     for i in range(len(ports)):

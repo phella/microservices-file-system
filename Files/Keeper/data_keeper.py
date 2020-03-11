@@ -30,5 +30,5 @@ def Keeper(id,port2):
     #tell master tracker i've finished U/D file...
     # socket2.send_pyopbj({"msg":"successfull_work" , "file" : None , "type":message["type"]})
 
-    socket_master.send_string("update "+str(id)+" "+ str(port)+" "+str(message["filename"]))
+    socket_master.send_string("update "+str(id)+" "+ str(port2)+" "+str(message["filename"]))
     log(" Sent free ports to master" , str(id))

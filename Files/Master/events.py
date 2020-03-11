@@ -11,15 +11,14 @@ def update_table( port , ips , free_ports , lookup_table ):
     for ip in ips :
         for i in range(3):
             socket.connect (ip + str(int(port)+i))
-
+    log(" Event file started successfully")
     topicfilter = "update"
     socket.setsockopt_string(zmq.SUBSCRIBE, topicfilter)
     while True:
-        log(" Event file started successfully")
         string = socket.recv_string()
-        topic , id , port , filename = string.split()
-        log(" Recived from id "+ id +" filename " + filename + " port free "+port)
-        free_ports[int(id)].append(port)
+        topic , id , free_port , filename = string.split()
+        log(" Recived from id "+ id +" filename " + filename + " port free " + free_port)
+        free_ports[int(id)].append(free_port)
         if filename in lookup_table :
             temp = lookup_table[filename]
             temp.append(id)
