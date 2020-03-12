@@ -2,7 +2,7 @@ import sys
 import zmq
 import signal
 from multiprocessing import Process, Array , Manager
-from utility import log 
+from utility import log ,listToString
 
 keepers = 0 
 def alive( no_keepers , ips , status , lookup_table , free_ports):
@@ -27,7 +27,7 @@ def alive( no_keepers , ips , status , lookup_table , free_ports):
         signal.alarm(2)
         state = socket.recv_string()
         topic , id = state.split()
-        log("Data keeper " + id + " alive")
+        #log("Data keeper " + id + " alive")
         id = int(id)
         active.add(id)
         if(status[ id ] == 0):         # Dead data keeper return back alive
@@ -35,12 +35,14 @@ def alive( no_keepers , ips , status , lookup_table , free_ports):
         counter += 1
         if( counter ==  current ):                # 1 sec completed
             if(len(active) != current):           # Replicated data keeper means 1 data keeper is dead
+                log(" Detected dead data keeper")
                 status = [0] * no_keepers
                 current = len(active)             # New current number
                 for i in range(0 , current):
                     status[active.pop() ] = 1    # Mark active data keepers 
             counter = 0                                 #init counters
             active.clear()
+            log(listToString(status))
 
 
 def handler(signum, frame):
