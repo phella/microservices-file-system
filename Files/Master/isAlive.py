@@ -4,9 +4,10 @@ import signal
 from multiprocessing import Process, Array , Manager
 from utility import log ,listToString
 
-keepers = 0 
+keepers = 0
 def alive( no_keepers , ips , status , lookup_table , free_ports):
     current = no_keepers     # Number of alive data keepers
+    global keepers
     keepers = no_keepers
     active =  {0}      # Every second collect data keepers in set
     active.clear()
@@ -48,3 +49,4 @@ def alive( no_keepers , ips , status , lookup_table , free_ports):
 def handler(signum, frame):
     signal.alarm(2)
     status = [0]*keepers
+    log(listToString(status))
