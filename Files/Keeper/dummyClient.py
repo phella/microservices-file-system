@@ -6,19 +6,17 @@ import up_down
 
 context = zmq.Context()
 socketDk = context.socket(zmq.REQ)
+port="7001"
+context = zmq.Context()
+socket = context.socket(zmq.PULL)
+socket.connect("tcp://192.168.110.134:" + port)
 
 def makeConnections(ports, ips):
     for i in range(len(ports)):
         socketDk.connect(ips[i]+":%s" % ports[i])
 
 
-def dummyClient(port):
-    context = zmq.Context()
-    socket = context.socket(zmq.PULL)
-    socket.connect("tcp://192.168.110.134:%s" % port)
-    context = zmq.Context()
-    socketDk = context.socket(zmq.REQ)
-
+def dummyClient():
     while True:
         message=socket.recv_pyobj()
         ports=message["ports"]
