@@ -1,12 +1,14 @@
 import sys
 import zmq
 import time
-
+from utility  import log 
 port = "7000"
 sockets=[]
 context = zmq.Context()
 zmq_socket = context.socket(zmq.PUSH)
 def replica( no_of_datakeepers , num_of_replicas , status , lookup , freeports , ips ):
+    log(str(no_of_datakeepers))
+    log(str(num_of_replicas))
     for i in range(no_of_datakeepers):
         zmq_socket.bind("tcp://*:%s" % str(int(port)+i))
         sockets.append(zmq_socket)
@@ -26,7 +28,9 @@ def replica( no_of_datakeepers , num_of_replicas , status , lookup , freeports ,
 
 def repeat(index, used , status , lookup , freeports , ips , count , num_of_replicas):# index of the file in the lookup table
     free_keepers = [x for x in range(len(status)) if x not in used]
+    log("repeat function called")
     for i in free_keepers:  #checking until find a datakeeper free of my file
+
             if( count >= num_of_replicas):
                 break
             if(status[i] == 1): #the datakeeper is alive
