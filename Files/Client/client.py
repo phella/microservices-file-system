@@ -13,7 +13,7 @@ context = zmq.Context()
 print ("Connecting to server...")
 socket = context.socket(zmq.REQ)
 for i in range(3):
-    socket.connect ("tcp://localhost:%s" % str(port + i))
+    socket.connect ("tcp://192.168.110.134:%s" % str(port + i))
 client_id = random.randrange(1,10005)
 
 
@@ -47,4 +47,4 @@ def main(type , filename):
         up_down.download(socketDk,filename)
         log("File downloaded successfully")
 
-main(sys.argv[1] ,  sys.argv[2] )
+main(sys.argv[1] ,  sys.argv[2])

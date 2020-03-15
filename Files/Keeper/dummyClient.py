@@ -6,10 +6,10 @@ import up_down
 
 context = zmq.Context()
 socketDk = context.socket(zmq.REQ)
-port="7000"
+port="7001"
 context = zmq.Context()
 socket = context.socket(zmq.PULL)
-socket.connect("tcp://127.0.0.1:%s" % port)
+socket.connect("tcp://192.168.110.134:" + port)
 
 def makeConnections(ports, ips):
     for i in range(len(ports)):
