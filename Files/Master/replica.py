@@ -23,11 +23,11 @@ def replica( no_of_datakeepers , num_of_replicas , status , lookup , freeports ,
             for node in nodes:
                 if( x >= num_of_replicas):
                     break
-                log("node =" , node)
+                log("node =" ,str(node))
                 used.add(int(node))
                 if(status[int(node)]):
                     x += 1
-            log("x = " , x)    
+            log("x = " + str(x))    
             repeat(fil , used , status , lookup , freeports , ips , x , num_of_replicas)
         time.sleep(10)
 
@@ -44,7 +44,7 @@ def repeat(index, used , status , lookup , freeports , ips , count , num_of_repl
                 temp = freeports[i]
                 #print("Free ports =" , freeports[i])
                 x = temp.pop(0)
-                log("free port =  ", x )
+                log("free port =  " + str(x) )
                 freeports[i] = temp
                 lis.append(x)
                 lis2.append(ips[i])

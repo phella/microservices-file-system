@@ -4,6 +4,7 @@ import random
 import time
 import os
 import cv2 
+from utility import log
 
 def upload (socketDk,file):
     # cap =cv2.cv2.VideoCapture(file) #path of the file
@@ -16,12 +17,19 @@ def upload (socketDk,file):
     #     socketDk.send_pyobj({"frame":image})
     #     success,image = cap.read()
     # return socketDk.recv_pyobj()
-    f = open(file,'rb')
-    rd = f.read()
-    socketDk.send_pyobj({"type":"upload","file" : rd ,"filename" : file})
+    # f = open(file,'rb')
+    # rd = f.read()
+    # socketDk.send_pyobj({"type":"upload","file" : rd ,"filename" : file})
+    # f.close()
+    # return socketDk.recv_pyobj()
+    f=open(file,'rb')
+    rd=f.read()
+    log("File readed successfully")
+    socketDk.send_pyobj({"type":"upload","file":rd, "filename":file})
+    log("File sent successfully")
     f.close()
-    return socketDk.recv_pyobj()
-
+    # return socketDk.recv_pyobj()
+    return "successful uploading"
 
 def download (socketDk,file ,filename):
     # socketDk.send_pyobj({"type" : "download" , "file":file })
