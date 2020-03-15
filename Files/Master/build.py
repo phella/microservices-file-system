@@ -36,3 +36,5 @@ if __name__ == '__main__':
         p2 = Process(target = update_table , args = ( str(3555) , ips , free_ports , lookup_table)  )
         p2.start()
         p0.join()
+        p1.join()
+        p2.join()

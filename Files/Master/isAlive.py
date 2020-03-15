@@ -37,7 +37,8 @@ def alive( no_keepers , ips , status , lookup_table , free_ports):
         if( counter ==  current ):                # 1 sec completed
             if(len(active) != current):           # Replicated data keeper means 1 data keeper is dead
                 log(" Detected dead data keeper")
-                status = [0] * no_keepers
+                for i in range(no_keepers):
+                    status[i] = 0
                 current = len(active)             # New current number
                 for i in range(0 , current):
                     status[active.pop() ] = 1    # Mark active data keepers 
