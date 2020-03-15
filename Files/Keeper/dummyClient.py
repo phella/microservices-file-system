@@ -6,7 +6,7 @@ import up_down
 
 context = zmq.Context()
 socketDk = context.socket(zmq.REQ)
-port="7001"
+port = "7000"
 context = zmq.Context()
 socket = context.socket(zmq.PULL)
 socket.connect("tcp://192.168.110.134:" + port)
