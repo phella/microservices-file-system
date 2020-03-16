@@ -15,7 +15,7 @@ context = zmq.Context()
 print ("Connecting to server...")
 socket = context.socket(zmq.REQ)
 for i in range(3):
-    socket.connect ("tcp://192.168.110.134:%s" % str(port + i))
+    socket.connect ("tcp://10.8.0.34:%s" % str(port + i))
 client_id = random.randrange(1,10005)
 
 

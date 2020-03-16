@@ -5,22 +5,23 @@ import time
 import up_down
 
 
-def makeConnections(socket , ports, ips):
+def makeConnections(ports, ips,message):
     for i in range(len(ports)):
-        socket.connect(ips[i]+"%s" % ports[i])
+        context = zmq.Context()
+        soc = context.socket(zmq.REQ)
+        soc.connect(ips[i]+"%s" % ports[i])
+        up_down.upload(soc , message["filename"])
 
 
 def dummyClient():
-    context = zmq.Context()
-    soc = context.socket(zmq.REQ)
     port = "7000"
     context = zmq.Context()
     socket = context.socket(zmq.PULL)
-    socket.connect("tcp://127.0.0.1:" + port)
+    socket.bind("tcp://*:" + port)
     while True:
         message = socket.recv_pyobj()
+        print(message)
         print("recieved el7")
         ports = message["ports"]
         ips = message["ips"]
-        makeConnections(soc , ports, ips)
-        up_down.upload(soc , message["filename"])
+        makeConnections(ports, ips,message)

@@ -21,7 +21,7 @@ def Keeper(processId,keeperId,port2):
         # socket2.send/("Server message to client3")
         message = socket2.recv_pyobj()
         if(message["type"] == "download"):  #download
-            up_down.upload(socket2 , message["file"])
+            up_down.upload(socket2 , message["filename"])
             log("File downloaded syccessfully" ,str(keeperId))
         else : #upload
             up_down.download(socket2 , message["file"] , message["filename"])
@@ -31,5 +31,5 @@ def Keeper(processId,keeperId,port2):
         #tell master tracker i've finished U/D file...
         # socket2.send_pyopbj({"msg":"successfull_work" , "file" : None , "type":message["type"]})
 
-        socket_master.send_string("update "+str(keeperId)+" "+ str(port2)+" "+str(message["filename"]))
+        socket_master.send_string("update "+str(keeperId)+" "+ message["type"]+" "+str(port2)+" "+str(message["filename"]))
         log(" Sent free ports to master" , str(keeperId))
