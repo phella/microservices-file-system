@@ -2,7 +2,7 @@ import zmq
 import sys
 import time
 
-import up_down
+import up_downDK
 
 
 def makeConnections(socket , ports, ips):
