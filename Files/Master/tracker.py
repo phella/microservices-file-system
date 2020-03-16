@@ -43,7 +43,7 @@ def tracker(id , no_keepers , ips , port ,  status_table , lookup_table , free_p
             y = random.choice(nodes)
             while(not status_table[int(y)]):
                 y = random.choice(nodes)
-            while count < 1 :
+            while count < 1 :       # Get only 1 ip and 1 port
                 try:
                     temp = free_ports[int(y)]
                     x = temp.pop(0)
@@ -53,6 +53,5 @@ def tracker(id , no_keepers , ips , port ,  status_table , lookup_table , free_p
                     count += 1
                 except:
                     y = random.choice(nodes)
-            print(lis2)
-            socket.send_pyobj({"ports":lis, "ips":lis2})
-            log(" Respond to upload request" , str(id))
+            socket.send_pyobj({"ports" : lis, "ips" : lis2})
+            log("Tracker id: " + str(id) + " ,Respond to upload request : " + lis[0] + ":" + lis2[0] )

@@ -14,11 +14,12 @@ remove_log()
 
 no_processes = 3   # No of tracker processes
 port_base = 5556   # Port numbers base of tracker nodes
-no_keepers = 2    
+no_keepers = 3    
 status = Array('i', [1]*no_keepers)  # Status of data keepers alive or dead
 ips = [
     "tcp://127.0.0.1:",         # Array of data keepers arranged with keepers ids 
-    "tcp://192.168.43.79:"
+    "tcp://10.8.0.30:",
+    "tcp://10.8.0.37:"
 ]
 
 if __name__ == '__main__':

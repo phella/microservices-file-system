@@ -2,7 +2,7 @@ import zmq
 import sys
 import time
 
-import up_downDK
+import up_downDK as up_down
 
 
 def makeConnections(socket , ports, ips):
@@ -19,7 +19,6 @@ def dummyClient():
     socket.connect("tcp://127.0.0.1:" + port)
     while True:
         message = socket.recv_pyobj()
-        print("recieved el7")
         ports = message["ports"]
         ips = message["ips"]
         makeConnections(soc , ports, ips)

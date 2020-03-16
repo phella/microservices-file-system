@@ -39,16 +39,19 @@ def repeat(index, used , status , lookup , freeports , ips , count , num_of_repl
             if( count >= num_of_replicas):
                 break
             if(status[i] == 1): #the datakeeper is alive
-                count += 1
-                lis = []
-                lis2 = []
-                temp = freeports[i]
-                #print("Free ports =" , freeports[i])
-                x = temp.pop(0)
-                log("free port =  " + str(x) )
-                freeports[i] = temp
-                lis.append(x)
-                lis2.append(ips[i])
+                try : 
+                    lis = []
+                    lis2 = []
+                    temp = freeports[i]
+                    #print("Free ports =" , freeports[i])
+                    x = temp.pop(0)
+                    log("free port =  " + str(x) )
+                    freeports[i] = temp
+                    lis.append(x)
+                    lis2.append(ips[i])
+                    count += 1
+                except:
+                    continue
                 for j in used:
                     if(status[j] == 1):
                         global sockets
