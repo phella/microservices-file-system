@@ -8,10 +8,8 @@ import sys
 sys.path.append('../')
 from utility import log , remove_log
 
-remove_log()
 port = 5556
 context = zmq.Context()
-print ("Connecting to server...")
 socket = context.socket(zmq.REQ)
 for i in range(3):
     socket.connect ("tcp://192.168.110.134:%s" % str(port + i))
@@ -27,6 +25,9 @@ def askTracker(type , filename):
     log(" Request of type" + type + " sent")
     #  Get the reply of the DK and port no of it to communicate. 
     message = socket.recv_pyobj()
+    if( "error" in message.keys() ):
+        log(message["error"])
+        raise NameError('Failed')
     print(message)
     log(" Response recieved with ip" + message["ips"][0] + " port number " +message["ports"][0])
     return message
@@ -37,7 +38,10 @@ def makeConnections(ports,ips):
         log(" Client connected to data keeper")
 
 def main(type , filename):
-    message = askTracker(type ,filename)
+    try:
+        message = askTracker(type ,filename)
+    except:
+        return
     ports = message["ports"]
     ips = message["ips"]
     makeConnections( ports , ips ) 

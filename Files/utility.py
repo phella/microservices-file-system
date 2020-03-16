@@ -1,20 +1,22 @@
 import inspect
 import os
 
-def log(str , id = "0"):
+def log(str , name = "0"):
 	frame = inspect.stack()[1]
 	module = inspect.getmodule(frame[0])
 	filename = module.__file__
-	filename = filename[0:-3] + id
+	if(name != "0"):
+		filename = name
+	else:
+		filename = filename[0:-3]
 	filename += ".log.txt"
 	f = open(filename,"a+")
 	f.write(str)
 	f.write("\n")
 
-def listToString(s):  
-    
+
+def listToString(s):      
     str1 = ""  
-    
     # traverse in the string   
     for ele in s:  
         str1 += str(ele) + " "  

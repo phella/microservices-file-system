@@ -16,23 +16,27 @@ def tracker(id , no_keepers , ips , port ,  status_table , lookup_table , free_p
         lis = []
         lis2 = []
         count = 0
-        log(" Client request " + message["type"] +" filename " + message["file"] , str(id)) 
+        log("Keeper " + str(id) +": Client request " + message["type"] +" filename " + message["file"] ) 
         if(message["type"] == "upload"):
-            while count < 1 :
-                try:
-                    while(not status_table[counter]):
+            if( message["file"] in lookup_table.keys() ):
+                socket.send_pyobj({"error": "Filename already exists"})
+                log("Keeper" + str(id) + ": Filename already exists" )
+            else :    
+                while count < 1 :       # Only one data keeper needed
+                    try:
+                        while(not status_table[counter]):
+                            counter = (counter + 1)% no_keepers
+                        temp = free_ports[counter]
+                        x = str(temp.pop(0))
+                        free_ports[counter] = temp
+                        lis.append(x)
+                        lis2.append(str(ips[counter]))
+                        count += 1
                         counter = (counter + 1)% no_keepers
-                    temp = free_ports[counter]
-                    x = str(temp.pop(0))
-                    free_ports[counter] = temp
-                    lis.append(x)
-                    lis2.append(str(ips[counter]))
-                    count += 1
-                    counter = (counter + 1)% no_keepers
-                except:
-                    pass
-            socket.send_pyobj({"ports":lis , "ips" : lis2})
-            log(" Respond to upload request" , str(id))
+                    except:
+                        pass
+                socket.send_pyobj({"ports" : lis , "ips" : lis2})
+                log("Keeper" + str(id) + ": Respond to upload request" )
         elif( message["type" ] == "download"):
             filename = message["file"]
             nodes = lookup_table[filename]
