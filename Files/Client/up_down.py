@@ -4,7 +4,8 @@ import random
 import time
 import os
 import cv2 
-from utility import log
+sys.path.append('../')
+from utility import log , remove_log
 
 def upload (socketDk,file):
     # cap =cv2.cv2.VideoCapture(file) #path of the file

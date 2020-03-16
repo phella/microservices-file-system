@@ -2,7 +2,8 @@ import zmq
 import random
 import sys
 import time
-from utility import log
+sys.path.append('../')
+from utility import log , remove_log
 
 import up_down as up_down
 

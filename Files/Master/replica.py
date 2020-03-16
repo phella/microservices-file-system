@@ -1,7 +1,8 @@
 import sys
 import zmq
 import time
-from utility  import log ,listToString
+sys.path.append('../')
+from utility import log , listToString
 port = "7000"
 sockets=[]
 

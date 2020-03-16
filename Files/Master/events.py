@@ -1,6 +1,7 @@
 import zmq
 import time
 import sys
+sys.path.append('../')
 from utility import log , remove_log
 
 

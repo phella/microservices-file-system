@@ -3,6 +3,8 @@ import zmq
 import signal
 from multiprocessing import Process, Array , Manager
 from utility import log ,listToString
+sys.path.append('../')
+from utility import log , remove_log
 
 keepers = 0
 def alive( no_keepers , ips , status , lookup_table , free_ports):

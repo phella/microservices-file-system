@@ -4,8 +4,9 @@ import subprocess
 import importlib
 import os
 import sys
+sys.path.append('../')
+from utility import log , remove_log
 from multiprocessing import Process
-from utility import remove_log
 from data_keeper import Keeper
 from isAlive import alive 
 from dummyClient import dummyClient

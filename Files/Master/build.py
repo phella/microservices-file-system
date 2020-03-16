@@ -6,7 +6,7 @@ from tracker import tracker
 from isAlive import alive
 from replica import replica
 from events import update_table
-
+sys.path.append('../')
 from utility import log , remove_log
 
 remove_log()

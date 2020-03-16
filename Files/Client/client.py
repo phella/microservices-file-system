@@ -5,6 +5,8 @@ import time
 import os
 import cv2 
 import up_down
+import sys
+sys.path.append('../')
 from utility import log , remove_log
 
 remove_log()

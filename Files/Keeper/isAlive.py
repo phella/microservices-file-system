@@ -1,7 +1,8 @@
 import zmq
 import sys
 import time
-from utility import log
+sys.path.append('../')
+from utility import log , remove_log
 
 def alive(id , port):
     context = zmq.Context()

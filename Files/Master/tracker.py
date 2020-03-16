@@ -1,7 +1,8 @@
 import sys
 import zmq
 from multiprocessing import Process, Array , Manager
-from utility import log
+sys.path.append('../')
+from utility import log 
 import random
 
 def tracker(id , no_keepers , ips , port ,  status_table , lookup_table , free_ports):
