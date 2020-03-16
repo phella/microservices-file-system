@@ -3,8 +3,7 @@ import sys
 import random
 import time
 import os
-import cv2 
-import up_down
+import up_downCL as up_down
 import sys
 sys.path.append('../')
 from utility import log , remove_log

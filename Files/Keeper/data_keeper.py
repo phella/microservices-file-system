@@ -4,9 +4,7 @@ import sys
 import time
 sys.path.append('../')
 from utility import log , remove_log
-
-import up_down as up_down
-
+import up_downDK as up_down
 #pair connection to serve client upload/download
 def Keeper(processId,keeperId,port2):
     context = zmq.Context()
