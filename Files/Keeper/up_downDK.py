@@ -16,6 +16,6 @@ def download (socketDk,file ,filename):
     f = open(filename , 'wb')
     f.write(file)
     f.close()
-    log("File saved to datakeeper")
+    log("File saved to datakeeper , filename :" + filename)
     socketDk.send_string("succeful uploading")
    

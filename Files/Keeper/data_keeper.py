@@ -20,10 +20,10 @@ def Keeper(processId,keeperId,port2):
         message = socket2.recv_pyobj()
         if(message["type"] == "download"):  #download
             up_down.upload(socket2 , message["file"])
-            log("File downloaded syccessfully" ,str(keeperId))
+            log(" File downloaded syccessfully" ,str(keeperId))
         else : #upload
             up_down.download(socket2 , message["file"] , message["filename"])
-            log("File uploaded syccessfully" ,str(keeperId))
+            log(" File uploaded syccessfully" ,str(keeperId))
 
 
         #tell master tracker i've finished U/D file...
